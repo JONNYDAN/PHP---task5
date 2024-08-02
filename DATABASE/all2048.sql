@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 02, 2024 lúc 04:37 PM
+-- Thời gian đã tạo: Th8 02, 2024 lúc 05:03 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -67,7 +67,8 @@ CREATE TABLE `favorites` (
 INSERT INTO `favorites` (`id_favorites`, `id_game`, `id_user`) VALUES
 (2, 29, 1),
 (3, 13, 1),
-(5, 32, 14);
+(5, 32, 14),
+(6, 32, 1);
 
 -- --------------------------------------------------------
 
@@ -127,8 +128,8 @@ CREATE TABLE `games` (
 INSERT INTO `games` (`id_game`, `id_user`, `name_game`, `category_game`, `thumbnail_game`, `img_1_game`, `img_2_game`, `img_3_game`, `img_4_game`, `img_5_game`, `img_6_game`, `img_7_game`, `img_8_game`, `img_9_game`, `img_10_game`, `img_11_game`, `img_12_game`, `img_13_game`, `img_14_game`, `img_15_game`, `img_16_game`, `datetime_game`) VALUES
 (13, 1, 'Cat', 6, '0.jpg', '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '2024-07-23 14:50:01'),
 (29, 1, 'Dog', 7, '0.jpg', '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '2024-07-24 13:31:17'),
-(31, 1, 'GDGT1', 10, '0.png', '0.gif', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.gif', '9.png', '10.jpg', '11.jpg', '12.jpeg', '13.jpeg', '14.jpg', '15.jpg', '16.png', '2024-07-30 15:55:32'),
-(32, 14, 'Demo1', 10, '0.gif', '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.gif', '10.png', '11.png', '12.png', '13.png', '14.jpg', '15.jpeg', '16.jpg', '2024-07-31 19:35:10');
+(32, 14, 'Demo1', 10, '0.gif', '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.gif', '10.png', '11.png', '12.png', '13.png', '14.jpg', '15.jpeg', '16.jpg', '2024-07-31 19:35:10'),
+(35, 1, 'Cake', 1, '0_66acf4e9bb822.jpg', '1_66acf4e9bb825.jpg', '2_66acf4e9bb827.jpg', '3_66acf4e9bb828.jpg', '4_66acf4e9bb829.jpg', '5_66acf4e9bb82a.jpg', '6_66acf4e9bb82b.jpg', '7_66acf4e9bb82c.jpg', '8_66acf4e9bb82e.jpg', '9_66acf4e9bb82f.jpg', '10_66acf4e9bb830.jpg', '11_66acf4e9bb831.jpg', '12_66acf4e9bb833.jpg', '13_66acf4e9bb834.jpg', '14_66acf4e9bb835.jpg', '15_66acf4e9bb836.jpg', '16_66acf4e9bb837.jpg', '2024-08-02 22:02:01');
 
 -- --------------------------------------------------------
 
@@ -235,7 +236,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT cho bảng `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `id_favorites` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_favorites` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `follow`
@@ -247,7 +248,7 @@ ALTER TABLE `follow`
 -- AUTO_INCREMENT cho bảng `games`
 --
 ALTER TABLE `games`
-  MODIFY `id_game` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_game` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `rankings`

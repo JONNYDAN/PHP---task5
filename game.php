@@ -111,12 +111,26 @@ if (isset($_GET['id'])) {
                   <!-- <a href="javascript:void(0);" class="undo-button" role="button" id="btnUndo">Undo</a> -->
                 </div>
                 <?php
-                $sql_check = "SELECT * FROM favorites WHERE id_game = ? AND id_user = ?";
-                $stmt_check = $pdo->prepare($sql_check);
-                $stmt_check->execute([$id, $_SESSION['user']['id_user']]);
-                $is_favorite = $stmt_check->rowCount() > 0;
+                  if (isset($_SESSION['user'])) {
+                      $sql_check = "SELECT * FROM favorites WHERE id_game = ? AND id_user = ?";
+                      $stmt_check = $pdo->prepare($sql_check);
+                      $stmt_check->execute([$id, $_SESSION['user']['id_user']]);
+                      $is_favorite = $stmt_check->rowCount() > 0;
+                  ?>
+                      <div class="favorite-icon <?= $is_favorite ? 'added' : '' ?>" id="favoriteIcon" role="button"></div>
+                      <script>
+                          var isLoggedIn = true;
+                      </script>
+                  <?php
+                  } else {
+                  ?>
+                      <div class="favorite-icon" id="favoriteIcon" role="button"></div>
+                      <script>
+                          var isLoggedIn = false;
+                      </script>
+                  <?php
+                  }
                 ?>
-                <div class="favorite-icon <?= $is_favorite ? 'added' : '' ?>" id="favoriteIcon" role="button"></div>
               </div>
             </div>
             <?php
@@ -408,6 +422,10 @@ if (isset($_GET['id'])) {
         </div>
       </div>
     </div>
+    <div class="log-in-modal" id="loginModal" style="top: 137px; display: none;">
+    <h5>You must be <strong>logged in</strong> to add this game to your <strong>Favorites list</strong>.</h5>
+    <div class="btn-wrapper"><a href="login"><span class="btn btn-primary">Login</span></a><span class="btn btn-primary">Cancel</span></div>
+</div>
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
@@ -450,7 +468,7 @@ if (isset($_GET['id'])) {
     <script>
       var btnSoundSettings = document.getElementById('btnSoundSettings');
       var sound = document.getElementById('sound');
-      var soundEnabled = false; 
+      var soundEnabled = false;
 
       function playSound() {
         sound.currentTime = 0;
@@ -529,7 +547,7 @@ if (isset($_GET['id'])) {
         const restartBtnTrigger = document.getElementById('restartBtnTrigger');
 
         restartBtnTrigger.addEventListener('click', function() {
-          moveCount = 0; 
+          moveCount = 0;
           document.getElementById('moveCount').textContent = moveCount;
         });
       })();
@@ -556,7 +574,7 @@ if (isset($_GET['id'])) {
 
         setTimeout(() => {
           settingsModal.style.display = 'none';
-        }, 500); 
+        }, 500);
       }
 
       function toggleModal() {
@@ -589,30 +607,39 @@ if (isset($_GET['id'])) {
     </script>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
         var favoriteIcon = document.getElementById('favoriteIcon');
+        var loginModal = document.getElementById('loginModal');
         var pathParts = window.location.pathname.split('/');
         var id_game = pathParts[3];
 
         favoriteIcon.addEventListener('click', function() {
-          var isAdded = favoriteIcon.classList.toggle('added');
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", "request_check/check_favorites.php", true);
-          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-          xhr.send("id_game=" + id_game + "&type=" + (isAdded ? 1 : 0));
+            if (!isLoggedIn) {
+                loginModal.style.display = 'block';
+                return;
+            }
+            var isAdded = favoriteIcon.classList.toggle('added');
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "request_check/check_favorites.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("id_game=" + id_game + "&type=" + (isAdded ? 1 : 0));
         });
-      });
+
+        document.querySelector('.btn-wrapper .btn-primary:nth-child(2)').addEventListener('click', function() {
+            loginModal.style.display = 'none';
+        });
+    });
     </script>
 
     <script>
       document.getElementById('customGridBtn').addEventListener('click', function() {
         const li = this.closest('li');
-        const ul = li.querySelector('ul'); 
+        const ul = li.querySelector('ul');
 
         if (li.classList.contains('show')) {
-          li.classList.remove('show'); 
+          li.classList.remove('show');
         } else {
-          li.classList.add('show'); 
+          li.classList.add('show');
         }
       });
     </script>
