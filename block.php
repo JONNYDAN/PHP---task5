@@ -1,4 +1,4 @@
-<div class="game-blocks row no-gutters" id="relatedGames">
+<div class="game-blocks row no-gutters" id="">
     <?php
     $query = "SELECT * FROM games ORDER BY datetime_game DESC";
     $statement = $pdo->query($query);

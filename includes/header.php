@@ -1,9 +1,9 @@
 <?php
 ob_start();
 session_start();
-include ("includes/inc/config.php");
-include ("includes/inc/functions.php");
-include ("includes/inc/CSRF_Protect.php");
+include("includes/inc/config.php");
+include("includes/inc/functions.php");
+include("includes/inc/CSRF_Protect.php");
 $csrf = new CSRF_Protect();
 $error_message = '';
 ?>
@@ -23,8 +23,7 @@ $error_message = '';
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
 
     <style>
         @media(min-width: 768px) {
@@ -69,6 +68,44 @@ $error_message = '';
             background-size: 20px;
             background-repeat: no-repeat;
         }
+
+        .livesearch {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            z-index: 1000;
+            width: 100%; 
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-form:hover .livesearch {
+            display: block;
+        }
+
+        .livesearch li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .livesearch li:last-child {
+            border-bottom: none;
+        }
+
+        .livesearch .container-fluid {
+            padding: 0;
+        }
+
+        .livesearch .game-blocks {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .livesearch .col-lg-3, .livesearch .col-md-3, .livesearch .col-sm-3, .livesearch .col-xsm-6 {
+            padding: 5px;
+        }
+
     </style>
 
 </head>
@@ -152,8 +189,7 @@ $error_message = '';
                                 </li>
                                 <li class="has-subcategory ">
                                     <a href="">Animal</a>
-                                    <span class="child-indicator noselect" role="button"
-                                        onclick="dropDown(this)">+</span>
+                                    <span class="child-indicator noselect" role="button" onclick="dropDown(this)">+</span>
                                     <ul>
                                         <li>
                                             <a href="category/6">Cat</a>
@@ -165,8 +201,7 @@ $error_message = '';
                                 </li>
                                 <li class="has-subcategory ">
                                     <a href="">Food</a>
-                                    <span class="child-indicator noselect" role="button"
-                                        onclick="dropDown(this)">+</span>
+                                    <span class="child-indicator noselect" role="button" onclick="dropDown(this)">+</span>
                                     <ul>
                                         <li>
                                             <a href="category/8">Cake</a>
@@ -190,21 +225,15 @@ $error_message = '';
                             <a href="user-games">User Games</a>
                         </li>
                     </ul>
-                    
+
                     <ul class="search-form-ul">
                         <li class="li-search-form">
                             <div class="search-form">
-                                <input name="query" type="text" placeholder="Search" autocomplete="off"
-                                    spellcheck="false" id="searchInput" onfocusin="showLivesearch()" required>
+                                <input name="query" type="text" placeholder="Search" autocomplete="off" spellcheck="false" id="searchInput" required>
                                 <ul class="livesearch" id="livesearch">
-                                    <li>
-                                        <p>Type to get suggestions</p>
-                                        <div class="container-fluid">
-                                            <?php
-                                            include ('search.php');
-                                            ?>
-                                        </div>
-                                    </li>
+                                    <?php
+                                    include('search.php');
+                                    ?>
                                 </ul>
                             </div>
                         </li>
@@ -219,16 +248,39 @@ $error_message = '';
 
 
     <script>
-        function dropDown(element) {
-            
-        }
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const livesearch = document.getElementById('livesearch');
+
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value;
+
+            if (query.length > 0) {
+                fetch(`search.php?query=${encodeURIComponent(query)}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        livesearch.innerHTML = data;
+                        livesearch.style.display = 'block';
+                    });
+            } else {
+                livesearch.innerHTML = '<li><p>Type to get suggestions</p></li>';
+                livesearch.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!searchInput.contains(event.target) && !livesearch.contains(event.target)) {
+                livesearch.style.display = 'none';
+            }
+        });
+    });
     </script>
 
     <script>
-      function dropDown(element) {
+        function dropDown(element) {
             // Lấy phần tử cha có lớp "has-dropdown"
             var parent = element.parentElement;
-            
+
             // Kiểm tra xem phần tử cha có lớp "show-dropdown" không
             if (parent.classList.contains('show-dropdown')) {
                 // Nếu có, loại bỏ lớp
@@ -238,8 +290,4 @@ $error_message = '';
                 parent.classList.add('show-dropdown');
             }
         }
-
-
     </script>
-
-
