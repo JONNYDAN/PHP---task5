@@ -25,7 +25,6 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
 <?php
     function saveImageToSession($inputName)
     {
-        // Nếu có hình ảnh mới được tải lên, lưu nó vào session
         if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] === UPLOAD_ERR_OK) {
             $image = file_get_contents($_FILES[$inputName]['tmp_name']);
             $imageName = basename($_FILES[$inputName]['name']);
@@ -41,7 +40,6 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
     }
 
     function getImageSrc($inputName, $rowId, $rowName) {
-        // Kiểm tra nếu ảnh đã được lưu vào session
         if (isset($_SESSION[$inputName])) {
             return 'data:image/jpeg;base64,' . $_SESSION[$inputName];
         }
@@ -49,8 +47,7 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
         $target_dir = "uploads/{$rowId}/";
         $target_file = $target_dir . $rowName;
         
-        // Nếu không có ảnh nào, trả về ảnh mặc định
-        return $target_file; // Thay thế bằng đường dẫn tới ảnh mặc định
+        return $target_file; 
     }
 
     function getFileName($fileInputName, $index)
@@ -67,7 +64,6 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
         return $_SESSION[$fileInputName . '_path'] ?? null;
     }
 
-    // Di chuyển tệp từ thư mục tạm thời đến thư mục đích
     function moveFile($fileInputName, $pathInput, $id)
     {
         if ($fileInputName && $pathInput) {
@@ -77,13 +73,10 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
             }
             $targetFile = "{$targetDir}{$fileInputName}";
 
-            // Chỉ di chuyển tệp nếu nó tồn tại trong thư mục tạm
             if (file_exists($pathInput)) {
                 if (rename($pathInput, $targetFile)) {
-                    // Xóa tệp tạm sau khi di chuyển thành công
                     unlink($pathInput);
                 } else {
-                    // Xử lý lỗi khi không thể di chuyển tệp
                     echo "Failed to move file: {$fileInputName}";
                 }
             }
@@ -97,10 +90,10 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
     {
         $temp_dir = 'temp_uploads/';
         if (file_exists($temp_dir)) {
-            $files = glob($temp_dir . '*'); // Tìm tất cả các tệp trong thư mục
+            $files = glob($temp_dir . '*'); 
             foreach ($files as $file) {
                 if (is_file($file)) {
-                    unlink($file); // Xóa tệp
+                    unlink($file); 
                 }
             }
         }
@@ -114,7 +107,6 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
         $valid = 1;
 
-        // Lưu thông tin các tệp vào phiên
         foreach (['thumbnail_game', 'img_1_game', 'img_2_game', 'img_3_game', 'img_4_game', 'img_5_game', 'img_6_game', 'img_7_game', 'img_8_game', 'img_9_game', 'img_10_game', 'img_11_game', 'img_12_game', 'img_13_game', 'img_14_game', 'img_15_game', 'img_16_game'] as $field) {
             saveImageToSession($field);
         }

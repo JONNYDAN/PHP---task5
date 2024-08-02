@@ -6,6 +6,7 @@ include("includes/inc/functions.php");
 include("includes/inc/CSRF_Protect.php");
 $csrf = new CSRF_Protect();
 $error_message = '';
+$baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/';
 ?>
 
 <!DOCTYPE html>
@@ -111,7 +112,6 @@ $error_message = '';
 </head>
 
 <body>
-    <!-- <?php echo $_SESSION['user']['email_user']; ?> -->
     <header class="header" id="headerContent">
         <div class="header-inner">
             <div class="logo" id="logoAnchor">

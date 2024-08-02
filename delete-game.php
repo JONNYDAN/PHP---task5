@@ -7,7 +7,8 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
 
     $stmt = $pdo->prepare("DELETE FROM games WHERE id_game = ? AND id_user = ?");
     $stmt->execute([$id, $creator]);
-    header("location: dashboard");
+    header("Location: " . $baseUrl . "dashboard");
+    exit;
 }
 
 ?>

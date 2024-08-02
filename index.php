@@ -12,7 +12,6 @@ include ('includes/header.php');
       <div class="row text-center">
         <div class="col">
           <div class="load-more">
-            <!-- <span class="bordered-button" id="loadMoreBtn">View More</span> -->
             <img src="/img/loading/loader-search.svg" alt="Loading" width="35">
           </div>
         </div>

@@ -50,41 +50,18 @@ if (isset($_GET['id'])) {
 
                 <div class="game-blocks row no-gutters">
                     <?php
-                    $queries = [
-                        [
-                            "query" => "SELECT * FROM rankings_4 r4 
-                        INNER JOIN games g ON g.id_game = r4.id_game
-                        WHERE r4.id_user = ?
-                        ORDER BY datetime_play DESC",
-                            "size" => 4
-                        ],
-                        [
-                            "query" => "SELECT * FROM rankings_5 r5 
-                        INNER JOIN games g ON g.id_game = r5.id_game
-                        WHERE r5.id_user = ?
-                        ORDER BY datetime_play DESC",
-                            "size" => 5
-                        ],
-                        [
-                            "query" => "SELECT * FROM rankings_6 r6
-                        INNER JOIN games g ON g.id_game = r6.id_game
-                        WHERE r6.id_user = ?
-                        ORDER BY datetime_play DESC",
-                            "size" => 6
-                        ]
-                    ];
-
-                    foreach ($queries as $query_data) {
-                        $statement = $pdo->prepare($query_data['query']);
+                        $statement = $pdo->prepare("SELECT * FROM rankings r 
+                        INNER JOIN games g ON g.id_game = r.id_game
+                        WHERE r.id_user = ? 
+                        ORDER BY datetime_play DESC");
                         $statement->execute([$id]);
 
                         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                            $size = $query_data['size'];
                             $target_dir = "uploads/{$row['id_game']}/";
                             $target_file = $target_dir . $row['thumbnail_game'];
                     ?>
                             <div class="col-lg-3 col-md-3 col-sm-4 col-6">
-                                <a href="game/<?php echo $row['id_game'] ?>/<?php echo $size ?>" title="">
+                                <a href="game/<?php echo $row['id_game'] ?>/<?php echo $row['size'] ?>" title="">
                                     <div class="game-block">
                                         <div class="box" id="box_<?php echo $row['id_game'] ?>">
                                             <img src="<?php echo $target_file ?>" accept="image/*" height="200px" style="object-fit: cover;">
@@ -93,14 +70,13 @@ if (isset($_GET['id'])) {
                                         <div class="score-info">
                                             <p><span>Score</span> <span><?php echo $row['score_game'] ?></span></p>
                                             <p><span>Max Tile</span> <span><?php echo $row['tile_game'] ?></span></p>
-                                            <p><span>Grid Size</span> <span><?php echo $size ?> x <?php echo $size ?></span></p>
+                                            <p><span>Grid Size</span> <span><?php echo $row['size'] ?> x <?php echo $row['size'] ?></span></p>
                                         </div>
                                     </div>
                                 </a>
                             </div>
                     <?php
                         }
-                    }
                     ?>
                 </div>
 
@@ -120,7 +96,6 @@ if (isset($_GET['id'])) {
                 var isAdded = followBtnWrapper.classList.toggle('followed');
                 followBtn.textContent = isAdded ? 'Following' : 'Follow';
 
-                // Update the follower counter
                 var count = parseInt(followerCounter.getAttribute('data-count'));
                 count = isAdded ? count + 1 : count - 1;
                 followerCounter.setAttribute('data-count', count);

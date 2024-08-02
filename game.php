@@ -331,9 +331,9 @@ if (isset($_GET['id'])) {
                           </thead>
                           <tbody id="scoreTableBodyTop">
                             <?php
-                            $stmt_top = $pdo->prepare("SELECT * FROM rankings_$size r INNER JOIN users u ON r.id_user = u.id_user 
-                                                        WHERE id_game = ?");
-                            $stmt_top->execute([$id]);
+                            $stmt_top = $pdo->prepare("SELECT * FROM rankings r INNER JOIN users u ON r.id_user = u.id_user 
+                                                        WHERE id_game = ? AND size = ?");
+                            $stmt_top->execute([$id, $size]);
                             $rank = 1;
                             while ($row_top = $stmt_top->fetch(PDO::FETCH_ASSOC)) {
                             ?>
@@ -411,13 +411,11 @@ if (isset($_GET['id'])) {
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-        // Elements
         const gameContent = document.getElementById("gameContent");
         const fullscreenStartTrigger = document.getElementById("fullscreenStartTrigger");
         const fullscreenEndTrigger = document.getElementById("fullscreenEndTrigger");
         const gameContainerWrapper = document.querySelector(".game-container-wrapper");
 
-        // Function to enter fullscreen
         function enterFullscreen() {
           if (gameContent.requestFullscreen) {
             gameContent.requestFullscreen();
@@ -431,7 +429,6 @@ if (isset($_GET['id'])) {
           gameContainerWrapper.style.transform = 'scale(1.64384)';
         }
 
-        // Function to exit fullscreen
         function exitFullscreen() {
           if (document.exitFullscreen) {
             document.exitFullscreen();
@@ -445,7 +442,6 @@ if (isset($_GET['id'])) {
           gameContainerWrapper.style.transform = 'scale(1)';
         }
 
-        // Event listeners
         fullscreenStartTrigger.addEventListener("click", enterFullscreen);
         fullscreenEndTrigger.addEventListener("click", exitFullscreen);
       });
@@ -454,27 +450,23 @@ if (isset($_GET['id'])) {
     <script>
       var btnSoundSettings = document.getElementById('btnSoundSettings');
       var sound = document.getElementById('sound');
-      var soundEnabled = false; // Initially, sound is off
+      var soundEnabled = false; 
 
-      // Function to play sound
       function playSound() {
-        sound.currentTime = 0; // Rewind to start
+        sound.currentTime = 0;
         sound.play();
       }
 
-      // Toggle sound function
       btnSoundSettings.addEventListener('click', function() {
         var status = btnSoundSettings.getAttribute('data-status');
 
         if (status === 'off') {
-          // Turn on the sound function
           btnSoundSettings.textContent = 'ON';
           btnSoundSettings.setAttribute('data-status', 'on');
           btnSoundSettings.parentElement.classList.remove('settings-off');
           btnSoundSettings.parentElement.classList.add('settings-on');
           soundEnabled = true;
         } else {
-          // Turn off the sound function
           btnSoundSettings.textContent = 'OFF';
           btnSoundSettings.setAttribute('data-status', 'off');
           btnSoundSettings.parentElement.classList.remove('settings-on');
@@ -483,10 +475,8 @@ if (isset($_GET['id'])) {
         }
       });
 
-      // Event listener for keydown event
       document.addEventListener('keydown', function(event) {
         if (soundEnabled) {
-          // Check if the key is one of the specified keys
           switch (event.key) {
             case 'ArrowUp':
             case 'ArrowDown':
@@ -503,7 +493,6 @@ if (isset($_GET['id'])) {
               playSound();
               break;
             default:
-              // Do nothing for other keys
               break;
           }
         }
@@ -512,12 +501,9 @@ if (isset($_GET['id'])) {
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Lấy phần tử nút
         const clearBtn = document.getElementById('clearBtnTrigger');
 
-        // Thêm sự kiện nhấn nút
         clearBtn.addEventListener('click', function() {
-          // Xóa bestScore khỏi LocalStorage
           localStorage.removeItem('bestScore');
           location.reload();
         });
@@ -543,7 +529,7 @@ if (isset($_GET['id'])) {
         const restartBtnTrigger = document.getElementById('restartBtnTrigger');
 
         restartBtnTrigger.addEventListener('click', function() {
-          moveCount = 0; // Reset the move count
+          moveCount = 0; 
           document.getElementById('moveCount').textContent = moveCount;
         });
       })();
@@ -556,7 +542,6 @@ if (isset($_GET['id'])) {
       const settingsModalTrigger = document.getElementById('settingsModalTrigger');
       const settingsModalClose = document.querySelector('.settings-modal-close');
 
-      // Hàm để mở modal
       function openModal() {
         settingsModal.style.display = 'block';
         settingsModal.style.animationName = 'slideIn';
@@ -564,19 +549,16 @@ if (isset($_GET['id'])) {
         settingsModal.style.animationFillMode = 'forwards';
       }
 
-      // Hàm để đóng modal
       function closeModal() {
         settingsModal.style.animationName = 'slideOut';
         settingsModal.style.animationDuration = '0.5s';
         settingsModal.style.animationFillMode = 'forwards';
 
-        // Sử dụng setTimeout để đợi hoạt hình hoàn tất trước khi ẩn modal
         setTimeout(() => {
           settingsModal.style.display = 'none';
-        }, 500); // Đặt thời gian trùng với thời gian hoạt hình
+        }, 500); 
       }
 
-      // Hàm để chuyển đổi giữa mở và đóng modal
       function toggleModal() {
         if (settingsModal.style.display === 'block') {
           closeModal();
@@ -585,10 +567,8 @@ if (isset($_GET['id'])) {
         }
       }
 
-      // Gán sự kiện click cho nút kích hoạt modal
       settingsModalTrigger.addEventListener('click', toggleModal);
 
-      // Gán sự kiện click cho nút đóng modal
       settingsModalClose.addEventListener('click', closeModal);
     </script>
 
@@ -597,10 +577,8 @@ if (isset($_GET['id'])) {
         var btnThemeSettings = document.getElementById('btnThemeSettings');
 
         btnThemeSettings.addEventListener('click', function() {
-          // Toggle the dark-theme class on the body
           document.body.classList.toggle('dark-theme');
 
-          // Update the button text based on the presence of the dark-theme class
           if (document.body.classList.contains('dark-theme')) {
             btnThemeSettings.textContent = 'ON';
           } else {
@@ -628,14 +606,13 @@ if (isset($_GET['id'])) {
 
     <script>
       document.getElementById('customGridBtn').addEventListener('click', function() {
-        const li = this.closest('li'); // Lấy phần tử <li> chứa nút
-        const ul = li.querySelector('ul'); // Lấy phần tử <ul> bên trong <li>
+        const li = this.closest('li');
+        const ul = li.querySelector('ul'); 
 
-        // Chuyển đổi lớp 'show' để điều chỉnh hiển thị
         if (li.classList.contains('show')) {
-          li.classList.remove('show'); // Loại bỏ lớp 'show' để ẩn danh sách
+          li.classList.remove('show'); 
         } else {
-          li.classList.add('show'); // Thêm lớp 'show' để hiển thị danh sách
+          li.classList.add('show'); 
         }
       });
     </script>
@@ -649,20 +626,16 @@ if (isset($_GET['id'])) {
 
       rankingsBtn.addEventListener('click', () => {
         if (!isScoreContentVisible) {
-          // Hiển thị phần tử loading
           loadingScores.style.display = 'block';
 
-          // Ẩn phần tử bảng điểm
           scoreContent.style.display = 'none';
 
-          // Ẩn phần tử loading sau 2 giây và hiển thị bảng điểm
           setTimeout(() => {
             loadingScores.style.display = 'none';
             scoreContent.style.display = 'block';
             isScoreContentVisible = true;
           }, 2000);
         } else {
-          // Chuyển đổi trạng thái của phần tử bảng điểm
           scoreContent.style.display = scoreContent.style.display === 'none' ? 'block' : 'none';
         }
       });

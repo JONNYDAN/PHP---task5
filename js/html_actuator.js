@@ -155,13 +155,11 @@ HTMLActuator.prototype.message = function (won) {
     var pathParts = window.location.pathname.split('/');
     var id_game = pathParts[3];
     var size = pathParts[4];
-    var tableName = 'rankings_' + size; // Chọn bảng theo kích thước
     
-    // Sử dụng AJAX để gửi điểm số và maxTileValue đến server
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "save-score.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("id_game=" + id_game + "&score=" + score + "&maxTileValue=" + maxTileValue + "&tableName=" + tableName);
+    xhr.send("id_game=" + id_game + "&score=" + score + "&maxTileValue=" + maxTileValue + "&size=" + size);
   }
 };
 
@@ -171,19 +169,18 @@ HTMLActuator.prototype.getMaxTileValue = function () {
 
   tiles.forEach(function(tile) {
     var value = parseInt(tile.textContent.trim(), 10);
-    console.log('Tile value:', value); // Log each tile value
+    console.log('Tile value:', value);
     if (!isNaN(value) && value > maxTileValue) {
       maxTileValue = value;
     }
   });
 
-  console.log('Max tile value:', maxTileValue); // Log the max tile value
+  console.log('Max tile value:', maxTileValue); 
   return maxTileValue;
 };
 
 
 HTMLActuator.prototype.clearMessage = function () {
-  // IE only takes one value to remove at a time.
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
 };

@@ -161,7 +161,6 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
             }
             reader.readAsDataURL(file);
 
-            // Submit the form as soon as a file is selected
             const formData = new FormData(document.getElementById('avatarForm'));
             fetch('upload_avatar.php', {
                 method: 'POST',
@@ -170,7 +169,6 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
             .then(response => response.text())
             .then(data => {
                 console.log(data);
-                // Handle response, e.g., show a message or refresh the avatar preview
             })
             .catch(error => console.error('Error:', error));
         }

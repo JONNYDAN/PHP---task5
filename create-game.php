@@ -36,10 +36,9 @@ if (!isset($_SESSION['user'])) {
     <?php
     function saveImageToSession($inputName)
     {
-        // Nếu có hình ảnh mới được tải lên, lưu nó vào session
         if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] === UPLOAD_ERR_OK) {
             $image = file_get_contents($_FILES[$inputName]['tmp_name']);
-            $imageName = basename($_FILES[$inputName]['name']);
+            $imageName = uniqid() . '_' . basename($_FILES[$inputName]['name']);
             $imagePath = 'temp_uploads/' . $imageName;
 
             $_SESSION[$inputName] = base64_encode($image);
@@ -48,7 +47,6 @@ if (!isset($_SESSION['user'])) {
 
             move_uploaded_file($_FILES[$inputName]['tmp_name'], $imagePath);
         } else {
-            // Nếu không có hình ảnh mới, giữ lại hình ảnh cũ trong session
             if (!isset($_SESSION[$inputName])) {
                 $_SESSION[$inputName] = null;
                 $_SESSION[$inputName . '_name'] = null;
@@ -58,20 +56,18 @@ if (!isset($_SESSION['user'])) {
         return $_SESSION[$inputName];
     }
 
+
     function getImageSrc($inputName)
     {
-        // Kiểm tra nếu ảnh đã được lưu vào session
         if (isset($_SESSION[$inputName])) {
             return 'data:image/jpeg;base64,' . $_SESSION[$inputName];
         }
 
-        // Nếu không có ảnh trong session, kiểm tra đường dẫn tạm thời
         if (isset($_SESSION[$inputName . '_path']) && file_exists($_SESSION[$inputName . '_path'])) {
             return $_SESSION[$inputName . '_path'];
         }
 
-        // Nếu không có ảnh nào, trả về ảnh mặc định
-        return 'path/to/default/image.jpg'; // Thay thế bằng đường dẫn tới ảnh mặc định
+        return 'path/to/default/image.jpg';
     }
 
 
@@ -79,17 +75,17 @@ if (!isset($_SESSION['user'])) {
     {
         if (isset($_SESSION[$fileInputName . '_name'])) {
             $fileExtension = pathinfo($_SESSION[$fileInputName . '_name'], PATHINFO_EXTENSION);
-            return "{$index}.{$fileExtension}";
+            return "{$index}_" . uniqid() . ".{$fileExtension}";
         }
-        return null; 
+        return null;
     }
+
 
     function getFilePath($fileInputName)
     {
         return $_SESSION[$fileInputName . '_path'] ?? null;
     }
 
-    // Di chuyển tệp từ thư mục tạm thời đến thư mục đích
     function moveFile($fileInputName, $pathInput, $id)
     {
         if ($fileInputName && $pathInput) {
@@ -99,13 +95,10 @@ if (!isset($_SESSION['user'])) {
             }
             $targetFile = "{$targetDir}{$fileInputName}";
 
-            // Chỉ di chuyển tệp nếu nó tồn tại trong thư mục tạm
             if (file_exists($pathInput)) {
                 if (rename($pathInput, $targetFile)) {
-                    // Xóa tệp tạm sau khi di chuyển thành công
                     unlink($pathInput);
                 } else {
-                    // Xử lý lỗi khi không thể di chuyển tệp
                     echo "Failed to move file: {$fileInputName}";
                 }
             }
@@ -115,14 +108,15 @@ if (!isset($_SESSION['user'])) {
     }
 
 
+
     function cleanTempUploads()
     {
         $temp_dir = 'temp_uploads/';
         if (file_exists($temp_dir)) {
-            $files = glob($temp_dir . '*'); // Tìm tất cả các tệp trong thư mục
+            $files = glob($temp_dir . '*');
             foreach ($files as $file) {
                 if (is_file($file)) {
-                    unlink($file); // Xóa tệp
+                    unlink($file);
                 }
             }
         }
@@ -130,13 +124,13 @@ if (!isset($_SESSION['user'])) {
 
 
     $success_message = "";
+    $error_message = "";
     $error_message_name = "";
     $error_message_img = "";
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
         $valid = 1;
 
-        // Lưu thông tin các tệp vào phiên
         foreach (['thumbnail_game', 'img_1_game', 'img_2_game', 'img_3_game', 'img_4_game', 'img_5_game', 'img_6_game', 'img_7_game', 'img_8_game', 'img_9_game', 'img_10_game', 'img_11_game', 'img_12_game', 'img_13_game', 'img_14_game', 'img_15_game', 'img_16_game'] as $field) {
             saveImageToSession($field);
         }
@@ -189,31 +183,31 @@ if (!isset($_SESSION['user'])) {
 
             if ($file_data_thumb && $file_data_1 && $file_data_2 && $file_data_3 && $file_data_4 && $file_data_5 && $file_data_6 && $file_data_7 && $file_data_8 && $file_data_9 && $file_data_10 && $file_data_11 && $file_data_12 && $file_data_13 && $file_data_14 && $file_data_15 && $file_data_16) {
                 $statement = $pdo->prepare("INSERT INTO games (
-                email_creator,
-                name_game,
-                category_game,
-                thumbnail_game,
-                img_1_game,
-                img_2_game,
-                img_3_game,
-                img_4_game,
-                img_5_game,
-                img_6_game,
-                img_7_game,
-                img_8_game,
-                img_9_game,
-                img_10_game,
-                img_11_game,
-                img_12_game,
-                img_13_game,
-                img_14_game,
-                img_15_game,
-                img_16_game,
-                datetime_game
-            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    id_user,
+                    name_game,
+                    category_game,
+                    thumbnail_game,
+                    img_1_game,
+                    img_2_game,
+                    img_3_game,
+                    img_4_game,
+                    img_5_game,
+                    img_6_game,
+                    img_7_game,
+                    img_8_game,
+                    img_9_game,
+                    img_10_game,
+                    img_11_game,
+                    img_12_game,
+                    img_13_game,
+                    img_14_game,
+                    img_15_game,
+                    img_16_game,
+                    datetime_game
+                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
                 $statement->execute([
-                    $_SESSION['user']['email_user'],
+                    $_SESSION['user']['id_user'],
                     strip_tags($_POST['name_game']),
                     $category_game,
                     $file_data_thumb,
@@ -265,7 +259,7 @@ if (!isset($_SESSION['user'])) {
                     unset($_SESSION[$field . '_path']);
                 }
 
-                header("Location: http://localhost/2048/dashboard");
+                header("Location: " . $baseUrl . "dashboard");
                 exit();
             } else {
                 $error_message_img = "Failed to upload one or more images.";
@@ -276,7 +270,7 @@ if (!isset($_SESSION['user'])) {
 
 
 
-    <div class="content-wrapper" id="contentWrapper" onclick="hideLivesearch()">
+    <div class="content-wrapper" id="contentWrapper">
         <div class="content" id="content">
             <div class="container-fluid">
                 <div class="create-a-game">
@@ -306,10 +300,10 @@ if (!isset($_SESSION['user'])) {
                         <div class="row single-upload  privacy" id="rr9" style="padding-bottom: 17px;">
                             <div class="col">
                                 <div class="form-group" id="fg_creator_name">
-                                    <p class="font-weight-bold mb10">Game category</p> 
-                                    <select name="category_game" class="form-select"  
-                                        value="<?php if (isset($_POST['category_game'])) {
-                                            echo $_POST['category_game'];} ?>">
+                                    <p class="font-weight-bold mb10">Game category</p>
+                                    <select name="category_game" class="form-select" value="<?php if (isset($_POST['category_game'])) {
+                                                                                                echo $_POST['category_game'];
+                                                                                            } ?>">
                                         <option value="1">Aesthetics</option>
                                         <option value="2">Movie</option>
                                         <option value="3">TV Programs</option>
@@ -830,7 +824,9 @@ if (!isset($_SESSION['user'])) {
                                                                                                             } ?>" accept="image/*">
                                             </a>
                                         </div>
-                                        <span class="img-error" id="imgError16"></span>
+                                        <?php if ($error_message != '') {
+                                            echo "<div class='text-error'>" . $error_message . "</div>";
+                                        } ?>
                                     </div>
                                     <div class="col-666">
                                         <div class="upload-demo-wrap">
