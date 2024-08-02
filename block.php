@@ -5,7 +5,7 @@
     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         ?>
         <div class="col-lg-3 col-md-3 col-sm-4 col-6">
-        <a href="game.php?id=<?php echo $row['id_game'] ?>&size=4" title="2048 Taylor Swift">
+        <a href="game/<?php echo $row['id_game'] ?>/4" title="">
             <div class="game-block">
             <div class="box" id="box_<?php echo $row['id_game'] ?>">
                 <img src="<?php

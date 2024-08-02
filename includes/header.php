@@ -13,7 +13,8 @@ $error_message = '';
 
 <head>
     <meta charset="utf-8">
-    <title>2048 Cupcakes</title>
+    <base href="/2048/">
+    <title>2048</title>
 
     <link href="style/main.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="favicon.ico">
@@ -67,17 +68,17 @@ $error_message = '';
             background-position: 95% 50%;
             background-size: 20px;
             background-repeat: no-repeat;
-        } 
+        }
     </style>
 
 </head>
 
 <body>
-<!-- <?php echo $_SESSION['user']['email_user'];  ?> -->
-<header class="header" id="headerContent">
+    <!-- <?php echo $_SESSION['user']['email_user']; ?> -->
+    <header class="header" id="headerContent">
         <div class="header-inner">
             <div class="logo" id="logoAnchor">
-                <a href="index.php">
+                <a href="">
                     <strong>2048</strong>
                 </a>
             </div>
@@ -90,72 +91,64 @@ $error_message = '';
                                 Random <span class="hod">Game</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="">
-                                Popular <span class="hod">2048 Games</span>
-                            </a>
-                        </li>
                         <li class="has-dropdown">
                             <a href="javascript:void(0);" role="button" onclick="dropDown(this)">Account</a>
                             <?php
-                                if (!isset($_SESSION['user'])) {
-                                    echo '
+                            if (!isset($_SESSION['user'])) {
+                                echo '
                                         <ul>
                                             <li>
-                                                <a href="login.php">Login</a>
+                                                <a href="login">Login</a>
                                             </li>
                                             <li>
-                                                <a href="register.php">Register</a>
+                                                <a href="register">Register</a>
                                             </li>
                                         </ul>';
-                                }else{
-                                    echo '<ul>
+                            } else {
+                                echo '<ul>
                                             <li>
-                                                <a href="dashboard.php">Dashboard</a>
+                                                <a href="dashboard">Dashboard</a>
                                             </li>
                                             <li>
-                                                <a href="my-profile.php">My Profile</a>
+                                                <a href="my-profile">My Profile</a>
                                             </li>
                                             <li>
-                                                <a href="favorite-games.php">Favorite Games</a>
+                                                <a href="favorite-games">Favorite Games</a>
                                             </li>
                                             <li>
-                                                <a href="">Followed User Games</a>
+                                                <a href="following">following</a>
                                             </li>
                                             <li>
-                                                <a href="">Following</a>
+                                                <a href="followers">followers</a>
                                             </li>
                                             <li>
-                                                <a href="">Followers</a>
-                                            </li>
-                                            <li>
-                                                <a href="">My Games</a>
-                                            </li>
-                                            <li>
-                                                <a href="create-game.php">Create a Game</a>
+                                                <a href="create-game">Create a Game</a>
                                             </li>
                                             <li>
                                                 <a href="logout.php">Logout</a>
                                             </li>
                                         </ul>';
-                                }
+                            }
                             ?>
-                            
+
                         </li>
                         <li class="has-dropdown">
                             <a href="javascript:void(0);" role="button" onclick="dropDown(this)">Category</a>
                             <ul>
                                 <li>
-                                    <a href="">Aesthetics</a>
+                                    <a href="category/1">Aesthetics</a>
                                 </li>
                                 <li>
-                                    <a href="">Movie</a>
+                                    <a href="category/2">Movie</a>
                                 </li>
                                 <li>
-                                    <a href="">TV Programs</a>
+                                    <a href="category/3">TV Programs</a>
                                 </li>
                                 <li>
-                                    <a href="">Games</a>
+                                    <a href="category/4">Games</a>
+                                </li>
+                                <li>
+                                    <a href="category/5">Brands</a>
                                 </li>
                                 <li class="has-subcategory ">
                                     <a href="">Animal</a>
@@ -163,10 +156,10 @@ $error_message = '';
                                         onclick="dropDown(this)">+</span>
                                     <ul>
                                         <li>
-                                            <a href="">Cat</a>
+                                            <a href="category/6">Cat</a>
                                         </li>
                                         <li>
-                                            <a href="">Dog</a>
+                                            <a href="category/7">Dog</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -176,84 +169,28 @@ $error_message = '';
                                         onclick="dropDown(this)">+</span>
                                     <ul>
                                         <li>
-                                            <a href="">Cake</a>
+                                            <a href="category/8">Cake</a>
                                         </li>
                                         <li>
-                                            <a href="">Fruit</a>
+                                            <a href="category/9">Fruit</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="">Fashion</a>
-                                </li>
-                                <li class="has-subcategory ">
-                                    <a href="">Characters</a>
-                                    <span class="child-indicator noselect" role="button"
-                                        onclick="dropDown(this)">+</span>
-                                    <ul>
-                                        <li>
-                                            <a href="">Anime Characters</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Fictional
-                                                Characters</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="has-subcategory ">
-                                    <a href="">Celebrity</a>
-                                    <span class="child-indicator noselect" role="button"
-                                        onclick="dropDown(this)">+</span>
-                                    <ul>
-                                        <li>
-                                            <a href="">Actor</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Band</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Player</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Rapper</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Singer</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Tiktoker</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="">Brands</a>
+                                    <a href="category/10">Fashion</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="create-game.php">
+                            <a href="create-game">
                                 Create <span class="mit-create-a-game">a game</span>
                             </a>
                         </li>
                         <li>
-                            <a href="">User Games</a>
-                        </li>
-                        <li>
-                            <a href="">Game Creators</a>
-                        </li>
-                        <li>
-                            <a href="">Players</a>
-                        </li>
-                        <li>
-                            <a href="">Memory Game</a>
+                            <a href="user-games">User Games</a>
                         </li>
                     </ul>
-                    <ul class="more-links-ul">
-                        <li class="has-dropdown">
-                            <a href="javascript:void(0);" role="button" onclick="dropDown(this)">More</a>
-                            <ul class="more-links"></ul>
-                        </li>
-                    </ul>
+                    
                     <ul class="search-form-ul">
                         <li class="li-search-form">
                             <div class="search-form">
@@ -262,6 +199,11 @@ $error_message = '';
                                 <ul class="livesearch" id="livesearch">
                                     <li>
                                         <p>Type to get suggestions</p>
+                                        <div class="container-fluid">
+                                            <?php
+                                            include ('search.php');
+                                            ?>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -275,4 +217,29 @@ $error_message = '';
         </div>
     </header>
 
-    
+
+    <script>
+        function dropDown(element) {
+            
+        }
+    </script>
+
+    <script>
+      function dropDown(element) {
+            // Lấy phần tử cha có lớp "has-dropdown"
+            var parent = element.parentElement;
+            
+            // Kiểm tra xem phần tử cha có lớp "show-dropdown" không
+            if (parent.classList.contains('show-dropdown')) {
+                // Nếu có, loại bỏ lớp
+                parent.classList.remove('show-dropdown');
+            } else {
+                // Nếu không, thêm lớp
+                parent.classList.add('show-dropdown');
+            }
+        }
+
+
+    </script>
+
+

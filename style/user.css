@@ -1,0 +1,491 @@
+ .page-user-dashboard .profile-header {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     margin-bottom: 1rem;
+     margin-left: 8px;
+     margin-right: 8px;
+     padding-bottom: 0.5rem;
+     border-bottom: 1px solid #ddd;
+ }
+
+ .page-user-dashboard .profile-header h1 {
+     margin: 0px;
+ }
+
+ .page-user-dashboard .profile-header a {}
+
+ .page-user-dashboard .user-details {
+     text-align: center;
+     padding: 30px 10px 30px;
+     margin-left: 8px;
+     margin-right: 8px;
+     position: relative;
+ }
+
+ .page-user-dashboard .user-details .user-avatar {
+     width: 150px;
+     height: 150px;
+     margin: 0 auto;
+     border-radius: 50%;
+     overflow: hidden;
+     position: relative;
+     box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.35);
+ }
+
+ .page-user-dashboard .user-details .user-avatar .box {
+     margin: 0px;
+ }
+
+ .avatar-input-wrapper {
+     position: absolute;
+     top: 0;
+     bottom: -3px;
+     left: 0;
+     right: 0;
+     font-size: 0.75rem;
+     text-align: center;
+     display: flex;
+     align-items: flex-end;
+     justify-content: center;
+ }
+
+ .avatar-input-wrapper input {}
+
+ .avatar-input-wrapper input {
+     color: transparent;
+ }
+
+ .avatar-input-wrapper input:-webkit-file-upload-button {
+     visibility: hidden;
+ }
+
+ .avatar-input-wrapper input:before {
+     content: 'Change';
+     color: #444;
+     display: inline-block;
+     background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+     border: 1px solid #ddd;
+     border-radius: 0px;
+     padding: 4px 8px 7px;
+     outline: none;
+     white-space: nowrap;
+     -webkit-user-select: none;
+     cursor: pointer;
+     text-shadow: 1px 1px #fff;
+     font-weight: 700;
+     font-size: 10pt;
+     width: 100%;
+     text-align: center;
+     opacity: 0.5;
+     transition: opacity 0.3s;
+ }
+
+ .avatar-input-wrapper input:hover:before {
+     border-color: #fff;
+ }
+
+ .avatar-input-wrapper input:active {
+     outline: none;
+ }
+
+ .avatar-input-wrapper input:active:before {
+     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+ }
+
+ .page-user-dashboard .user-avatar.has-avatar .avatar-input-wrapper input:before {
+     opacity: 0;
+ }
+
+ .page-user-dashboard .user-avatar:hover .avatar-input-wrapper input:before {
+     opacity: 1;
+ }
+
+ .avatar-upload-container>div:first-child {
+     border-radius: 50%;
+     box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.35);
+ }
+
+ .avatar-upload-container.croppie-container .cr-viewport {
+     border: none;
+ }
+
+ .page-user-dashboard .user-details .user-avatar img {
+     -webkit-transition: all 0.2s ease-out 0s;
+     transition: all 0.2s ease-out 0s;
+ }
+
+ .page-user-dashboard .user-details .user-avatar img:hover {
+     transform: scale(1.15);
+ }
+
+ .page-user-dashboard .user-name {
+     margin-top: 1.25rem;
+     margin-bottom: 0.5rem;
+ }
+
+ .page-user-dashboard .user-game-count {
+     text-align: center;
+     font-size: 0.875rem;
+     margin-top: 7px;
+     margin-bottom: 5px;
+     opacity: 0.9;
+ }
+
+ .page-user-dashboard .profile-options {
+     position: absolute;
+     top: 8px;
+     right: 5px;
+ }
+
+ .page-user-dashboard .profile-options svg {
+     cursor: pointer;
+     fill: #555;
+     padding: 10px;
+     box-sizing: content-box;
+     border-radius: 50%;
+     transition: all 0.2s ease-out 0s;
+ }
+
+ .page-user-dashboard .user-details:hover .profile-options svg {
+     background: #eee;
+ }
+
+ .page-user-dashboard .user-details .profile-options svg:hover {
+     fill: #000;
+     background: #ddd;
+ }
+
+ .page-user-dashboard .user-details .profile-options svg.active {
+     fill: #000;
+     background: #ddd;
+ }
+
+ .page-user-dashboard .profile-options ul {
+     position: absolute;
+     top: 100%;
+     right: 14px;
+     margin: 0;
+     padding: 0;
+     background: #fff;
+     box-shadow: 0px 4px 10px rgb(0 0 0 / 20%);
+     display: none;
+ }
+
+ .page-user-dashboard .profile-options ul li {
+     list-style: none;
+ }
+
+ .page-user-dashboard .profile-options ul li a {
+     display: block;
+     padding: 0.5rem 1.5rem;
+     white-space: nowrap;
+ }
+
+ .page-user-dashboard .profile-options ul li a:hover {
+     background: #fafafa;
+ }
+
+ .page-user-dashboard .user-menu {
+     margin-bottom: 50px;
+     display: flex;
+     align-items: stretch;
+     justify-content: stretch;
+     flex-wrap: wrap;
+ }
+
+ .page-user-dashboard .user-menu a {
+     padding: 0.25rem 0.5rem;
+     border: 1px solid #ddd;
+     flex: 1;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+     min-height: 4rem;
+     white-space: nowrap;
+ }
+
+ .page-user-dashboard .user-menu a:first-child {
+     margin-left: 0px;
+ }
+
+ .page-user-dashboard .user-menu a:last-child {
+     margin-right: 0px;
+ }
+
+ .page-user-dashboard .user-menu a:nth-child(odd) {}
+
+ .page-user-dashboard .user-menu a:nth-child(even) {}
+
+ .page-user-dashboard .user-menu a:hover {
+     background: #ddd;
+ }
+
+ .page-user-dashboard .profile-games {
+     margin-bottom: 50px;
+ }
+
+ .page-user-dashboard .profile-no-games {
+     border: 1px solid #fafafa;
+     padding: 2rem 1rem 2.25rem;
+     background: #FAF8E7;
+ }
+
+ .page-user-dashboard .profile-games h2 a {
+     font-size: 1.25rem;
+     border-bottom: 1px solid #ddd;
+     padding-bottom: 0.75rem;
+     display: inline-block;
+ }
+
+ .page-user-dashboard .profile-games h2 a:hover {
+     border-color: #4C9EAF;
+     color: #1897b1;
+ }
+
+ .page-user-dashboard .profile-games h2 a span.games-count {
+     display: inline-block;
+     font-size: 0.75em;
+     padding: 0.125rem 0.5rem;
+     background: #e9e7de;
+     border-radius: 4px;
+     border: 1px solid #ddd;
+     margin-left: 1rem;
+     -webkit-transition: all 0.2s ease-out 0s;
+     transition: all 0.2s ease-out 0s;
+ }
+
+ .page-user-dashboard .profile-no-type-games {}
+
+ .page-user-dashboard .profile-no-type-games h2 {
+     margin: 0px
+ }
+
+ .page-user-dashboard .profile-no-type-games h2 a {
+     border: none;
+ }
+
+ .dont-have-any-item {
+     border: 1px solid #ddd;
+     padding: 2rem 1rem 2.25rem;
+     text-align: center;
+     border-radius: 4px;
+     margin-top: 15px;
+ }
+
+ .dont-have-any-item p {
+     margin: 0px;
+ }
+
+ .dont-have-any-item a {
+     margin-top: 1rem;
+ }
+
+ .game-block .privacy-text {
+     text-align: center;
+     padding: 4px 2px 8px 2px;
+     display: flex;
+     justify-content: center;
+ }
+
+ .game-block .privacy-text img {
+     width: 0.75em;
+     height: 0.75em;
+     margin-right: 0.5rem;
+ }
+
+ .game-block .privacy-text p {
+     font-size: 0.6875em;
+     font-weight: 300;
+     line-height: 1.2;
+     color: #32465a;
+     margin: 0px;
+     white-space: nowrap;
+ }
+
+ .game-block .privacy-text p.requested-to-delete {
+     color: #ED4C67;
+ }
+
+ .page-user-dashboard .privacy-explanation {
+     margin: 0px 8px 50px 8px;
+     padding: 20px 0px;
+ }
+
+ .page-user-dashboard .privacy-explanation h2 {
+     font-size: 1.5rem;
+     margin-bottom: 0.75rem;
+ }
+
+ .page-user-dashboard .privacy-explanation .private {
+     margin-bottom: 1rem;
+ }
+
+ .game-block .game-options {
+     position: absolute;
+     top: 8px;
+     right: 5px;
+     z-index: 1;
+ }
+
+ .game-block .game-options svg {
+     cursor: pointer;
+     fill: #555;
+     padding: 6px;
+     box-sizing: content-box;
+     border-radius: 50%;
+     transition: all 0.2s ease-out 0s;
+ }
+
+ .game-block .game-options svg {
+     background: #eee;
+     opacity: 0.75;
+ }
+
+ .game-block .game-options:hover svg {
+     fill: #000;
+     background: #ddd;
+ }
+
+ .game-block .game-options svg.active {
+     fill: #000;
+     background: #ddd;
+ }
+
+ .game-block .game-options ul {
+     position: absolute;
+     top: 100%;
+     right: 0px;
+     margin: 0;
+     padding: 0;
+     background: #fff;
+     box-shadow: 0px 4px 10px rgb(0 0 0 / 20%);
+     display: none;
+ }
+
+ .game-block .game-options:hover ul {
+     display: block;
+ }
+
+ .game-block .game-options ul li {
+     list-style: none;
+ }
+
+ .game-block .game-options ul li a {
+     display: block;
+     padding: 0.25rem 0.5rem;
+     cursor: pointer;
+     font-size: 1rem;
+ }
+
+ .game-block .game-options ul li a:hover {
+     background: #e5e5e5;
+ }
+
+ .game-block:hover .game-options svg {
+     opacity: 1;
+ }
+
+ .game-block.deleted-game:hover {
+     box-shadow: 0px 2px 4px rgb(0 0 0 / 30%);
+ }
+
+ .game-block.deleted-game span {
+     position: absolute;
+     left: 50%;
+     top: 50%;
+     z-index: 1;
+     transform: translate(-50%, -50%);
+     padding: 1rem;
+     color: #ccc;
+ }
+
+ .delete-confirm-modal {
+     position: fixed;
+     top: 100px;
+     left: 50%;
+     background: #fff;
+     padding: 1.5rem 1rem 0.75rem;
+     width: 80%;
+     max-width: 350px;
+     transform: translateX(-50%);
+     box-shadow: 0px 0px 25px #000;
+     z-index: 2;
+     border-radius: 4px;
+     text-align: center;
+ }
+
+ .delete-confirm-modal .btn-wrapper {
+     display: flex;
+     align-items: center;
+     justify-content: space-around;
+     margin-top: 0.5rem;
+ }
+
+ .delete-confirm-modal p {
+     font-size: 0.75rem;
+     line-height: 1.4;
+ }
+
+ .delete-confirm-modal span {
+     display: inline-block;
+     margin: 1rem;
+     padding: .25rem 1rem;
+ }
+
+ .breadcrumb {
+     padding-left: 8px;
+     padding-right: 8px;
+     background: transparent;
+ }
+
+ .profile-games {
+     margin-bottom: 50px;
+ }
+
+ .profile-games .page-header {
+     background: #eee;
+     text-align: center;
+     padding: 30px 15px;
+     margin-bottom: 1rem;
+     border-radius: 4px;
+ }
+
+ .profile-gamesdddddd h1 {
+     font-size: 1.5625rem;
+     margin-right: 8px;
+     margin-left: 8px;
+     border-bottom: 2px solid #ddd;
+     padding-bottom: 0.75rem;
+     display: inline-block;
+ }
+
+ .profile-games h1 {
+     text-align: center;
+     position: relative;
+     margin-bottom: 0px;
+     padding-bottom: 0.5rem;
+ }
+
+ .profile-games p.games-count {
+     font-size: 0.75em;
+     margin: 0;
+     color: #888;
+     text-align: center;
+ }
+
+ .profile-games .page-header .bordered-button {
+     font-size: 1rem;
+     padding: 0.375rem 1.5rem;
+     margin-top: 0.75rem;
+ }
+
+ .page-follow-users .box {
+     background: #ddd;
+ }
+
+ .page-follow-users .box:before {
+     border-radius: 50%;
+     margin: 1rem;
+ }

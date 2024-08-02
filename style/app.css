@@ -10431,11 +10431,11 @@ hr {
     width: 40px;
     height: 40px;
     cursor: pointer;
-    background: url(https://all2048.com/img/heart/heart_grey.svg) center center/cover no-repeat transparent;
+    background: url(img/heart_grey.svg) center center/cover no-repeat transparent;
 }
 
 .favorite-icon.added {
-    background: url(https://all2048.com/img/heart/heart_red.svg) center center/cover no-repeat transparent;
+    background: url(img/heart_red.svg) center center/cover no-repeat transparent;
     animation: fiScaleAnimation .5s ease-in-out;
 }
 
@@ -10639,26 +10639,26 @@ hr {
 }
 
 .gf-buttons > ul > li > a span.fs-start-btn {
-    background-image: url(https://all2048.com/img/fullscreen.svg);
+    background-image: url(img/fullscreen.svg);
     background-size: 26px 26px;
 }
 
 .gf-buttons > ul > li > a span.custom-grid-btn {
-    background-image: url(https://all2048.com/img/grid.svg);
+    background-image: url(img/grid.svg);
 }
 
 .gf-buttons > ul > li > a span.settings-btn {
-    background-image: url(https://all2048.com/img/settings.svg);
+    background-image: url(img/settings.svg);
     background-size: 34px 34px;
 }
 
 .gf-buttons > ul > li > a span.scores-btn {
-    background-image: url(https://all2048.com/img/rank.svg);
+    background-image: url(img/rank.svg);
     background-size: 26px 26px;
 }
 
 .gf-buttons > ul > li > a.options-btn {
-    background-image: url(https://all2048.com/img/options2.svg);
+    background-image: url(img/options2.svg);
 }
 
 .gf-buttons ul li ul {
@@ -11591,7 +11591,14 @@ textarea, select, input, button {
     color: #ED4C67;
 }
 
-.game-scores-container {
+/* .game-scores-container {
+    display: none;
+} */
+
+.container-fluid .loading-scores {
+    display: none;
+}
+.game-scores-container #scoreContent {
     display: none;
 }
 
@@ -12725,7 +12732,6 @@ a.bordered-button {
 .page-players .gold-league .league-header h2 {
     color: #d59f02;
 }
-}
 
 .page-players .silver-league .league-header h2 {
     color: #979797;
@@ -12877,7 +12883,7 @@ a.bordered-button {
     text-align: center;
 }
 
-.url-group h1, .url-group h2, .url-group span, {
+.url-group h1, .url-group h2, .url-group span {
     font-weight: bold;
 }
 
@@ -12886,7 +12892,7 @@ a.bordered-button {
     border-radius: 2rem;
 }
 
-.url-group > h1, .url-group > h2, .url-group > span, {
+.url-group > h1, .url-group > h2, .url-group > span {
 }
 
 .url-group a {
@@ -12899,7 +12905,7 @@ a.bordered-button {
     margin-right: 0px;
 }
 
-.url-group h1:last-child, .url-group h2:last-child, .url-group span, {
+.url-group h1:last-child, .url-group h2:last-child, .url-group span {
     margin-right: 0px;
 }
 
@@ -13111,7 +13117,7 @@ a.bordered-button {
 }
 
 .bronze-user .user-badge {
-    background-image: url(/img/badges/bronze.png);
+    background-image: url(img/badges/bronze.png);
 }
 
 .bronze-user .badge-name {
@@ -14954,23 +14960,23 @@ body.dark-theme, .dark-theme .header a, .dark-theme .header-menu ul li a, .dark-
 }
 
 .gf-buttons > ul > li > a span.fs-start-btn {
-    background-image: url(https://all2048.com/img/fullscreen-dark.svg);
+    background-image: url(img/fullscreen-dark.svg);
 }
 
 .gf-buttons > ul > li > a span.custom-grid-btn {
-    background-image: url(https://all2048.com/img/grid-dark.svg);
+    background-image: url(img/grid-dark.svg);
 }
 
 .gf-buttons > ul > li > a span.settings-btn {
-    background-image: url(https://all2048.com/img/settings-dark.svg);
+    background-image: url(img/settings-dark.svg);
 }
 
 .gf-buttons > ul > li > a span.scores-btn {
-    background-image: url(https://all2048.com/img/rank-dark.svg);
+    background-image: url(img/rank-dark.svg);
 }
 
 .gf-buttons > ul > li > a.options-btn {
-    background-image: url(https://all2048.com/img/options2-dark.svg);
+    background-image: url(img/options2-dark.svg);
 }
 
 .dark-theme .gf-buttons ul li ul {

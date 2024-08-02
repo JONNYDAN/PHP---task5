@@ -1,0 +1,39 @@
+RewriteEngine On
+
+RewriteRule ^dashboard$ /2048/dashboard.php [L]
+
+RewriteRule ^my-profile$ /2048/my-profile.php [L]
+
+RewriteRule ^login$ /2048/login.php [L]
+
+RewriteRule ^register$ /2048/register.php [L]
+
+RewriteRule ^logout$ /2048/logout.php [L]
+
+RewriteRule ^reset-password$ /2048/reset-password.php [L]
+
+RewriteRule ^user-games$ /2048/user-games.php [L]
+
+RewriteRule ^edit-game$ /2048/edit-game.php [L]
+
+RewriteRule ^create-game$ /2048/create-game.php [L]
+
+RewriteRule ^favorite-games$ /2048/favorite-games.php [L]
+
+RewriteRule ^followers$ /2048/followers.php [L]
+
+RewriteRule ^following$ /2048/following.php [L]
+
+RewriteRule ^upload_avatar$ /2048/upload_avatar.php [L]
+
+# Rewrite rule for game URLs
+RewriteRule ^game/([0-9]+)/([0-9]+)$ /2048/game.php?id=$1&size=$2 [L,QSA]
+
+RewriteRule ^edit-game/([0-9]+)/([0-9]+)$ /2048/edit-game.php?id=$1&creator=$2 [L,QSA]
+
+RewriteRule ^delete-game/([0-9]+)/([0-9]+)$ /2048/delete-game.php?id=$1&creator=$2 [L,QSA]
+
+RewriteRule ^category/([0-9]+)$ /2048/category.php?id=$1 [L,QSA]
+
+RewriteRule ^user-profile/([0-9]+)$ /2048/user-profile.php?id=$1 [L,QSA]
+

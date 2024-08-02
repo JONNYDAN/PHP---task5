@@ -1,0 +1,12 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <circle id="svg_1" transform="rotate(240.09800720214844 50.00000000000001,50.00000000000001) " r="35" stroke-width="10" stroke="#bbb" fill="none" cy="50" cx="50"/>
+  <rect stroke="#bbb" transform="rotate(45.042667388916016 10.358407020568842,89.72360229492188) " id="svg_2" height="35.432969" width="6" y="72.007116" x="7.358405" fill-opacity="null" stroke-opacity="null" stroke-width="6" fill="none"/>
+ </g>
+</svg>

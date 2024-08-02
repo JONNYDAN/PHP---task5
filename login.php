@@ -9,10 +9,10 @@ include ('includes/header.php');
                 <div class="auth-type">
                     <h1>Login</h1>
                     <h2>
-                        <a href="register.php">Register</a>
+                        <a href="register">Register</a>
                     </h2>
                 </div>
-                <form method="POST" action="login.php" id="form-login">
+                <form method="POST" action="login" id="form-login">
                     <?php $csrf->echoInputField(); ?>
                     <input type="hidden" name="_token" value="644PVrg1q2tDmBLX16zyVp2CRoA5EEdIEwV3bUl4">
                     <div class="form-group row">

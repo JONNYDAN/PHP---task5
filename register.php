@@ -11,16 +11,19 @@ $error_message_re_pass = "";
 if (isset($_POST['email_user'])) {
 
     $datetime_user = date('Y-m-d H:i:s');
+    $avatar = "avatar.png";
 
-    $statement = $pdo->prepare("INSERT INTO tables_user (
+    $statement = $pdo->prepare("INSERT INTO users (
                                         name_user,
+                                        avatar_user,
                                         email_user,
                                         pass_user,
                                         datetime_user
-                                    ) VALUES (?,?,?,?)");
+                                    ) VALUES (?,?,?,?,?)");
     $statement->execute(
         array(
             strip_tags($_POST['name_user']),
+            $avatar,
             strip_tags($_POST['email_user']),
             md5($_POST['pass_user']),
             $datetime_user
@@ -37,11 +40,11 @@ if (isset($_POST['email_user'])) {
             <div class="auth-page log-reg-page register-page">
                 <div class="auth-type">
                     <h2>
-                        <a href="login.php">Login</a>
+                        <a href="login">Login</a>
                     </h2>
                     <h1>Register</h1>
                 </div>
-                <form method="POST" action="register.php" id="form-register">
+                <form method="POST" action="register" id="form-register">
                     <?php $csrf->echoInputField(); ?>
                     <input type="hidden" name="_token" value="i9bF377BA4n5ZI4E45xRBW3XNt2yEfpREXIbNsGv">
                     <div class="form-group row">

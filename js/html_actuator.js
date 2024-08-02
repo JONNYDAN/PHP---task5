@@ -51,10 +51,11 @@ HTMLActuator.prototype.addTile = function (tile) {
 
   var wrapper   = document.createElement("div");
   var inner     = document.createElement("div");
+  var text      = document.createElement("span"); // Create the span element
   var position  = tile.previousPosition || { x: tile.x, y: tile.y };
   var positionClass = this.positionClass(position);
 
-  // We can't use classlist because it somehow glitches when replacing classes
+  // We can't use classList because it somehow glitches when replacing classes
   var classes = ["tile", "tile-" + tile.value, positionClass];
 
   if (tile.value > 2048) classes.push("tile-super");
@@ -63,6 +64,21 @@ HTMLActuator.prototype.addTile = function (tile) {
 
   inner.classList.add("tile-inner");
   inner.textContent = tile.value;
+
+  // Check the visibility state from btnTvSettings before adding text
+  const btnTvSettings = document.getElementById('btnTvSettings');
+  if (btnTvSettings.textContent !== 'Hidden') {
+    // Adding the span element with class "tile-text" only if visible
+    text.classList.add("tile-text");
+    text.style.display = 'block';
+    text.textContent = tile.value; // Set the content of the span to match the tile's value
+    inner.appendChild(text); // Append the span to the inner div
+  }else{
+    text.classList.add("tile-text");
+    text.style.display = 'none';
+    text.textContent = tile.value; // Set the content of the span to match the tile's value
+    inner.appendChild(text);
+  }
 
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first
@@ -127,10 +143,44 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
 HTMLActuator.prototype.message = function (won) {
   var type    = won ? "game-won" : "game-over";
   var message = won ? "You win!" : "Game over!";
-
+  
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
+
+  if (!won) {
+    var score = this.score;
+    var maxTileValue = this.getMaxTileValue();
+    
+    // Lấy id_game và size từ đường dẫn URL
+    var pathParts = window.location.pathname.split('/');
+    var id_game = pathParts[3];
+    var size = pathParts[4];
+    var tableName = 'rankings_' + size; // Chọn bảng theo kích thước
+    
+    // Sử dụng AJAX để gửi điểm số và maxTileValue đến server
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "save-score.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("id_game=" + id_game + "&score=" + score + "&maxTileValue=" + maxTileValue + "&tableName=" + tableName);
+  }
 };
+
+HTMLActuator.prototype.getMaxTileValue = function () {
+  var tiles = document.querySelectorAll('.tile-text');
+  var maxTileValue = 0;
+
+  tiles.forEach(function(tile) {
+    var value = parseInt(tile.textContent.trim(), 10);
+    console.log('Tile value:', value); // Log each tile value
+    if (!isNaN(value) && value > maxTileValue) {
+      maxTileValue = value;
+    }
+  });
+
+  console.log('Max tile value:', maxTileValue); // Log the max tile value
+  return maxTileValue;
+};
+
 
 HTMLActuator.prototype.clearMessage = function () {
   // IE only takes one value to remove at a time.
