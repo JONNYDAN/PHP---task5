@@ -155,7 +155,7 @@ if (isset($_SESSION['user']) && isset($_GET['id']) $_SESSION['user']['id_user'])
                     <p class="text-center">
                         <a class="bordered-button" href="dashboard">Dashboard</a>
                     </p>
-                    <form name="mainForm" id="mainForm" action="edit-game/<?php echo $row['id_game'] ?>/<?php echo $_SESSION['user']['id_user'] ?>" method="post"
+                    <form name="mainForm" id="mainForm" action="edit-game/<?php echo $row['id_game'] ?>/" method="post"
                         enctype='multipart/form-data'>
                         <input type="hidden" name="_token" value="kykz4nkc4wJ5ZuV25OkqXVpcC4RUmwMNNQhN2tlc">
                         <div class="row single-upload" id="rr8" style="padding-bottom: 17px;">
