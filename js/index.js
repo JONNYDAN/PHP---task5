@@ -102,8 +102,8 @@ function checkValueLogin() {
                         case 'error_2':
                             alert("Mật khẩu không chính xác.");
                             break;
-                        case 'success':
-                            window.location.href = "index.php";
+                        default:
+                            window.location.href = "";
                     }
                 },
                 error: function (xhr, status, error) {

@@ -15388,7 +15388,7 @@ body.dark-theme, .dark-theme .header a, .dark-theme .header-menu ul li a, .dark-
     }
 
     .header-menu ul li > a {
-        padding: 1.25rem 1rem;
+        padding: 1rem 1rem;
         text-decoration: none;
         color: #fff;
         display: block;

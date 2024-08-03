@@ -17,11 +17,11 @@ $dbuser = 'root';
 // Database Password
 $dbpass = '';
 
-// Defining base url
-define("BASE_URL", "");
+// // Defining base url
+// define("BASE_URL", "");
 
-// Getting Admin url
-define("ADMIN_URL", BASE_URL . "admin" . "/");
+// // Getting Admin url
+// define("ADMIN_URL", BASE_URL . "admin" . "/");
 
 try {
 	$pdo = new PDO("mysql:host={$dbhost};dbname={$dbname};charset=utf8mb4", $dbuser, $dbpass);

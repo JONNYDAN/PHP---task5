@@ -39,6 +39,8 @@
     </div>
 </div>
 
+<script src="js/keyboard_input_manager.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         const searchInput = document.getElementById('searchInput');
@@ -83,15 +85,14 @@
 
     burgWrapper.addEventListener('click', (event) => {
         if (headerNavWrapper.classList.contains('nav-shown')) {
-            headerNavWrapper.classList.remove('nav-shown'); // Loại bỏ lớp 'show' để ẩn danh sách
+            headerNavWrapper.classList.remove('nav-shown'); 
             burgIcon.classList.remove('activeBurg');
         } else {
-            headerNavWrapper.classList.add('nav-shown'); // Thêm lớp 'show' để hiển thị danh sách
+            headerNavWrapper.classList.add('nav-shown'); 
             burgIcon.classList.add('activeBurg');
         }
     })
 </script>
-<!-- <script src="js/app.js"></script> -->
 </body>
 
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 02, 2024 lúc 05:03 PM
+-- Thời gian đã tạo: Th8 03, 2024 lúc 10:24 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -129,7 +129,8 @@ INSERT INTO `games` (`id_game`, `id_user`, `name_game`, `category_game`, `thumbn
 (13, 1, 'Cat', 6, '0.jpg', '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '2024-07-23 14:50:01'),
 (29, 1, 'Dog', 7, '0.jpg', '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '2024-07-24 13:31:17'),
 (32, 14, 'Demo1', 10, '0.gif', '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.gif', '10.png', '11.png', '12.png', '13.png', '14.jpg', '15.jpeg', '16.jpg', '2024-07-31 19:35:10'),
-(35, 1, 'Cake', 1, '0_66acf4e9bb822.jpg', '1_66acf4e9bb825.jpg', '2_66acf4e9bb827.jpg', '3_66acf4e9bb828.jpg', '4_66acf4e9bb829.jpg', '5_66acf4e9bb82a.jpg', '6_66acf4e9bb82b.jpg', '7_66acf4e9bb82c.jpg', '8_66acf4e9bb82e.jpg', '9_66acf4e9bb82f.jpg', '10_66acf4e9bb830.jpg', '11_66acf4e9bb831.jpg', '12_66acf4e9bb833.jpg', '13_66acf4e9bb834.jpg', '14_66acf4e9bb835.jpg', '15_66acf4e9bb836.jpg', '16_66acf4e9bb837.jpg', '2024-08-02 22:02:01');
+(35, 1, 'Cake', 1, '0_66acf4e9bb822.jpg', '1_66acf4e9bb825.jpg', '2_66acf4e9bb827.jpg', '3_66acf4e9bb828.jpg', '4_66acf4e9bb829.jpg', '5_66acf4e9bb82a.jpg', '6_66acf4e9bb82b.jpg', '7_66acf4e9bb82c.jpg', '8_66acf4e9bb82e.jpg', '9_66acf4e9bb82f.jpg', '10_66acf4e9bb830.jpg', '11_66acf4e9bb831.jpg', '12_66acf4e9bb833.jpg', '13_66acf4e9bb834.jpg', '14_66acf4e9bb835.jpg', '15_66acf4e9bb836.jpg', '16_66acf4e9bb837.jpg', '2024-08-02 22:02:01'),
+(37, 1, 'Cake', 1, '0.jpg', '1_66ad155e83cdf.jpg', '2_66ad155e83ce0.jpg', '3_66ad155e83ce1.jpg', '4_66ad155e83ce2.jpg', '5_66ad155e83ce3.jpg', '6_66ad155e83ce4.jpg', '7_66ad155e83ce5.jpg', '8_66ad155e83ce6.jpg', '9_66ad155e83ce7.jpg', '10_66ad155e83ce8.jpg', '11_66ad155e83ce9.jpg', '12_66ad155e83cea.jpg', '13_66ad155e83ceb.jpg', '14_66ad155e83cec.jpg', '15_66ad155e83ced.jpg', '16_66ad155e83cee.jpg', '2024-08-03 00:20:30');
 
 -- --------------------------------------------------------
 
@@ -248,7 +249,7 @@ ALTER TABLE `follow`
 -- AUTO_INCREMENT cho bảng `games`
 --
 ALTER TABLE `games`
-  MODIFY `id_game` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_game` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT cho bảng `rankings`

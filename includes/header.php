@@ -59,7 +59,7 @@ $baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) 
         }
 
         #searchInput {
-            width: 100px;
+            width: 200px;
             border-radius: 10px;
             border: none;
             padding-left: 5px;
@@ -153,10 +153,10 @@ $baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) 
                                                 <a href="favorite-games">Favorite Games</a>
                                             </li>
                                             <li>
-                                                <a href="following">following</a>
+                                                <a href="following">Following</a>
                                             </li>
                                             <li>
-                                                <a href="followers">followers</a>
+                                                <a href="followers">Followers</a>
                                             </li>
                                             <li>
                                                 <a href="create-game">Create a Game</a>

@@ -3,7 +3,7 @@ include ('includes/header.php');
 ?>
 
 <div class="content-wrapper" id="contentWrapper">
-  <div class="content game-single" id="content">
+  <div class="content game-single" id="content" style="min-height: calc(100vh - 168px);">
     <div class="container-fluid mt-35 mb-25">
       <h2 class="title">Games</h2>
       <?php
@@ -21,7 +21,6 @@ include ('includes/header.php');
 </div>
 
 
-<script src="js/keyboard_input_manager.js"></script>
 <?php
 include ('includes/footer.php');
 ?>

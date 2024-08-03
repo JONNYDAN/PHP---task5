@@ -3,7 +3,33 @@ include('includes/header.php');
 ?>
 
 <head>
-    <link rel="stylesheet" href="style/create.css">
+    <style>
+        .highlighted-info {
+            padding: 1rem 1rem;
+            background: #e0e0e0;
+            text-align: center;
+            border-radius: 4px;
+            margin: 30px auto;
+            max-width: 450px;
+        }
+
+        .auth-buttons {
+            text-align: center;
+        }
+
+        .auth-buttons a {
+            padding: 0.5rem 1rem;
+            background: #ddd;
+            border-radius: 4px;
+            margin: 1rem;
+            display: inline-block;
+        }
+
+        .dark-theme .highlighted-info {
+            background: #32465a;
+            background: #253444;
+        }
+    </style>
     <style>
         .img-preview {
             width: 200px;
@@ -16,7 +42,7 @@ include('includes/header.php');
 <?php
 if (!isset($_SESSION['user'])) {
 ?>
-    <div class="content-wrapper" id="contentWrapper" onclick="hideLivesearch()">
+    <div class="content-wrapper" id="contentWrapper">
         <div class="content" id="content" style="min-height: calc(100vh - 127px);">
             <div class="container-fluid">
                 <article class="article">
@@ -32,6 +58,7 @@ if (!isset($_SESSION['user'])) {
 <?php
 } else {
 ?>
+    <link rel="stylesheet" href="style/create.css">
 
     <?php
     function saveImageToSession($inputName)
@@ -67,7 +94,7 @@ if (!isset($_SESSION['user'])) {
             return $_SESSION[$inputName . '_path'];
         }
 
-        return 'path/to/default/image.jpg';
+        return '';
     }
 
 
@@ -259,7 +286,8 @@ if (!isset($_SESSION['user'])) {
                     unset($_SESSION[$field . '_path']);
                 }
 
-                header("Location: " . $baseUrl . "dashboard");
+                $new_id = $pdo->lastInsertId();
+                header("Location: " . $baseUrl . "game/" . $new_id ."/4");
                 exit();
             } else {
                 $error_message_img = "Failed to upload one or more images.";
@@ -280,6 +308,24 @@ if (!isset($_SESSION['user'])) {
                     </p>
                     <form name="mainForm" id="mainForm" action="create-game" method="post" enctype='multipart/form-data'>
                         <input type="hidden" name="_token" value="kykz4nkc4wJ5ZuV25OkqXVpcC4RUmwMNNQhN2tlc">
+                        <div class="row single-upload">
+                            <div class="col">
+                                <div class="instructions">
+                                    <h2 class="text-center">Instructions</h2>
+                                    <ol>
+                                        <li><span>You will be able to play the game right after you create it.</span></li>
+                                        <li>Insert the name of the game.</li>
+                                        <li>You <b>must</b> upload at least 13 images. One image is for the <b>Thumbnail image</b> of the game, and the other 12 images are for the Tile images. <span class="text-warningggg text-highlight">All the <b>Tile images</b> must be <b>unique</b></span>. But, you can choose any of the tile images as the Thumbnail image.</li>
+                                        <li><span class="text-warning">Don't upload <b>Violent or Sexual</b> images, images with <b>watermarks</b> or <b>copyrighted</b> images</span>. <span class="latest-warning"> Images must not show excessive amounts of skin or cleavage (even if not explicitly sexual in nature) or focus unnecessarily on body parts, such as abs, buttocks or chest (even if not explicitly sexual in nature).</span></li>
+                                        <li>To upload an image, click on the <b>Upload</b> button, then select an image from your PC/Mobile.</li>
+                                        <li>After you select an image, it will be displayed on the right side of the upload box. <span class="text-highlightttt">Only the visible part of the image will be uploaded to the server. You can <b>drag the image to reposition</b> the visible part of the image.</span> You can <b>zoom in</b> or <b>zoom out</b> by scrolling the mouse wheel after placing the pointer on the image.</li>
+                                        <li>Submit the game.</li>
+                                        <li>As you submit the game, you agree to our terms and conditions, privacy and cookie policies.</li>
+                                        <li>We reserve all the rights to update or delete the game without any prior notice.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row single-upload" id="rr8" style="padding-bottom: 17px;">
                             <div class="col">
                                 <div class="form-group" id="fg_game_name">
@@ -337,7 +383,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo0" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 200px; height: 200px;">
-                                                    <img id="imgPreview0" class="img-preview" name="thumbnail_game" src="<?php echo getImageSrc('thumbnail_game'); ?>" alt="">
+                                                    <img id="imgPreview0" class="img-preview" name="thumbnail_game" <?php if (isset($_SESSION['thumbnail_game'])) {
+                                                                                                                        echo 'src="' . getImageSrc('thumbnail_game') . '"';
+                                                                                                                    } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 200px; height: 200px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -366,7 +414,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo1" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview1" class="img-preview" name="img_1_game" src="<?php echo getImageSrc('img_1_game'); ?>" alt="">
+                                                    <img id="imgPreview1" class="img-preview" name="img_1_game" <?php if (isset($_SESSION['img_1_game'])) {
+                                                                                                                    echo 'src="' . getImageSrc('img_1_game') . '"';
+                                                                                                                } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -396,7 +446,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo2" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview2" class="img-preview" name="img_2_game" src="<?php echo getImageSrc('img_2_game'); ?>" alt="">
+                                                    <img id="imgPreview2" class="img-preview" name="img_2_game" <?php if (isset($_SESSION['img_2_game'])) {
+                                                                                                                    echo 'src="' . getImageSrc('img_2_game') . '"';
+                                                                                                                } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -428,7 +480,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo3" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview3" class="img-preview" name="img_3_game" src="<?php echo getImageSrc('img_3_game'); ?>" alt="">
+                                                    <img id="imgPreview3" class="img-preview" name="img_3_game" <?php if (isset($_SESSION['img_3_game'])) {
+                                                                                                                    echo 'src="' . getImageSrc('img_3_game') . '"';
+                                                                                                                } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -458,7 +512,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo4" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview4" class="img-preview" name="img_4_game" src="<?php echo getImageSrc('img_4_game'); ?>" alt="">
+                                                    <img id="imgPreview4" class="img-preview" name="img_4_game" <?php if (isset($_SESSION['img_4_game'])) {
+                                                                                                                    echo 'src="' . getImageSrc('img_4_game') . '"';
+                                                                                                                } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -490,7 +546,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo3" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview5" class="img-preview" name="img_5_game" src="<?php echo getImageSrc('img_5_game'); ?>" alt="">
+                                                    <img id="imgPreview5" class="img-preview" name="img_5_game" <?php if (isset($_SESSION['img_5_game'])) {
+                                                                                                                    echo 'src="' . getImageSrc('img_5_game') . '"';
+                                                                                                                } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -520,7 +578,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo4" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview6" class="img-preview" name="img_6_game" src="<?php echo getImageSrc('img_6_game'); ?>" alt="">
+                                                    <img id="imgPreview6" class="img-preview" name="img_6_game" <?php if (isset($_SESSION['img_6_game'])) {
+                                                                                                                    echo 'src="' . getImageSrc('img_6_game') . '"';
+                                                                                                                } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -552,7 +612,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo3" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview7" class="img-preview" name="img_7_game" src="<?php echo getImageSrc('img_7_game'); ?>" alt="">
+                                                    <img id="imgPreview7" class="img-preview" name="img_7_game" <?php if (isset($_SESSION['img_7_game'])) {
+                                                                                                                    echo 'src="' . getImageSrc('img_7_game') . '"';
+                                                                                                                } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -582,7 +644,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo4" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview8" class="img-preview" name="img_8_game" src="<?php echo getImageSrc('img_8_game'); ?>" alt="">
+                                                    <img id="imgPreview8" class="img-preview" name="img_8_game" <?php if (isset($_SESSION['img_8_game'])) {
+                                                                                                                    echo 'src="' . getImageSrc('img_8_game') . '"';
+                                                                                                                } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -614,7 +678,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo3" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview9" class="img-preview" name="img_9_game" src="<?php echo getImageSrc('img_9_game'); ?>" alt="">
+                                                    <img id="imgPreview9" class="img-preview" name="img_9_game" <?php if (isset($_SESSION['img_9_game'])) {
+                                                                                                                    echo 'src="' . getImageSrc('img_9_game') . '"';
+                                                                                                                } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -644,7 +710,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo4" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview10" class="img-preview" name="img_10_game" src="<?php echo getImageSrc('img_10_game'); ?>" alt="">
+                                                    <img id="imgPreview10" class="img-preview" name="img_10_game" <?php if (isset($_SESSION['img_10_game'])) {
+                                                                                                                        echo 'src="' . getImageSrc('img_10_game') . '"';
+                                                                                                                    } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -676,7 +744,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo3" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview11" class="img-preview" name="img_11_game" src="<?php echo getImageSrc('img_11_game'); ?>" alt="">
+                                                    <img id="imgPreview11" class="img-preview" name="img_11_game" <?php if (isset($_SESSION['img_11_game'])) {
+                                                                                                                        echo 'src="' . getImageSrc('img_11_game') . '"';
+                                                                                                                    } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -706,7 +776,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo4" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview12" class="img-preview" name="img_12_game" src="<?php echo getImageSrc('img_12_game'); ?>" alt="">
+                                                    <img id="imgPreview12" class="img-preview" name="img_12_game" <?php if (isset($_SESSION['img_12_game'])) {
+                                                                                                                        echo 'src="' . getImageSrc('img_12_game') . '"';
+                                                                                                                    } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -738,7 +810,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo3" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview13" class="img-preview" name="img_13_game" src="<?php echo getImageSrc('img_13_game'); ?>" alt="">
+                                                    <img id="imgPreview13" class="img-preview" name="img_13_game" <?php if (isset($_SESSION['img_13_game'])) {
+                                                                                                                        echo 'src="' . getImageSrc('img_13_game') . '"';
+                                                                                                                    } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -768,7 +842,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo4" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview14" class="img-preview" name="img_14_game" src="<?php echo getImageSrc('img_14_game'); ?>" alt="">
+                                                    <img id="imgPreview14" class="img-preview" name="img_14_game" <?php if (isset($_SESSION['img_14_game'])) {
+                                                                                                                        echo 'src="' . getImageSrc('img_14_game') . '"';
+                                                                                                                    } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -800,7 +876,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo3" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview15" class="img-preview" name="img_15_game" src="<?php echo getImageSrc('img_15_game'); ?>" alt="">
+                                                    <img id="imgPreview15" class="img-preview" name="img_15_game" <?php if (isset($_SESSION['img_15_game'])) {
+                                                                                                                        echo 'src="' . getImageSrc('img_15_game') . '"';
+                                                                                                                    } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
@@ -832,7 +910,9 @@ if (!isset($_SESSION['user'])) {
                                         <div class="upload-demo-wrap">
                                             <div id="upload-demo4" class="croppie-container">
                                                 <div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;">
-                                                    <img id="imgPreview16" class="img-preview" name="img_16_game" src="<?php echo getImageSrc('img_16_game'); ?>" alt="">
+                                                    <img id="imgPreview16" class="img-preview" name="img_16_game" <?php if (isset($_SESSION['img_16_game'])) {
+                                                                                                                        echo 'src="' . getImageSrc('img_16_game') . '"';
+                                                                                                                    } ?> alt="">
                                                     <div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div>
                                                     <div class="cr-overlay"></div>
                                                 </div>
