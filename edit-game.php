@@ -13,12 +13,11 @@ include ('includes/header.php');
 </head>
 
 <?php
-if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESSION['user']['id_user']) {
+if (isset($_SESSION['user']) && isset($_GET['id']) $_SESSION['user']['id_user']) {
     $id = intval($_GET['id']);
-    $creator = intval($_GET['creator']);
 
-    $stmt = $pdo->prepare("SELECT * FROM games WHERE id_game = ?");
-    $stmt->execute([$id]);
+    $stmt = $pdo->prepare("SELECT * FROM games WHERE id_game = ? AND id_user");
+    $stmt->execute([$id, $_SESSION['user']['id_user']]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
