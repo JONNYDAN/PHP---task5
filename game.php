@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
 
   $id = intval($_GET['id']);
   $size = intval($_GET['size']);
-  $url_share = 'http://localhost/2048/game/' . $id . '/' . $size;
+  $url_share = $HOST .'/2048/game/' . $id . '/' . $size;
 
   $facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($url_share);
   $twitterUrl = "https://twitter.com/intent/tweet?url=" . urlencode($url_share) . "&text=Check+out+this+game!";
