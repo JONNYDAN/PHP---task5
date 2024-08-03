@@ -213,7 +213,7 @@ if (isset($_GET['id'])) {
               <?php
               if (isset($_SESSION['user']) && $_SESSION['user']['id_user'] == $row['id_user']) {
               ?>
-                <div> <a href="edit-game/<?php echo $row['id_game'] ?>/">Edit</a> </div>
+                <div> <a href="edit-game/<?php echo $row['id_game'] ?>">Edit</a> </div>
               <?php
               }
               ?>
