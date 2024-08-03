@@ -21,13 +21,12 @@ function deleteDirectory($dir)
     return rmdir($dir);
 }
 
-if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESSION['user']['id_user']) {
+if (isset($_SESSION['user']) && isset($_GET['id']) &&  $_SESSION['user']['id_user']) {
     $id = intval($_GET['id']);
-    $creator = intval($_GET['creator']);
 
     // Xóa game từ cơ sở dữ liệu
     $stmt = $pdo->prepare("DELETE FROM games WHERE id_game = ? AND id_user = ?");
-    $stmt->execute([$id, $creator]);
+    $stmt->execute([$id, $_SESSION['user']['id_user']]);
 
     // Xóa thư mục chứa ảnh của game
     $dir = "uploads/{$id}/";
