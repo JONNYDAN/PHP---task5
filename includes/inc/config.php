@@ -17,6 +17,9 @@ $dbuser = 'root';
 // Database Password
 $dbpass = '';
 
+//Hosting
+$HOST = 'http://localhost';
+
 // // Defining base url
 // define("BASE_URL", "");
 
