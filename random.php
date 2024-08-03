@@ -13,7 +13,7 @@ if (count($ids) > 0) {
     
     $random_id = $ids[$random_ids];
     
-    header("location: ". $HOST .'2048/game/'. $random_id. '/4'); 
+    header("location: ". $HOST .'/2048/game/'. $random_id. '/4'); 
 } else {
     echo "Không có ID nào trong bảng games.";
 }
