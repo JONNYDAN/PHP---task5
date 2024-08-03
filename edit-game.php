@@ -13,7 +13,7 @@ include ('includes/header.php');
 </head>
 
 <?php
-if (isset($_SESSION['user']) && isset($_GET['id']) $_SESSION['user']['id_user']) {
+if (isset($_SESSION['user']) && isset($_GET['id'])) {
     $id = intval($_GET['id']);
 
     $stmt = $pdo->prepare("SELECT * FROM games WHERE id_game = ? AND id_user");
