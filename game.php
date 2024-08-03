@@ -553,6 +553,30 @@ if (isset($_GET['id'])) {
       })();
     </script>
 
+    <script>
+        function startTimer() {
+            let seconds = 0;
+            const timerElement = document.getElementById('timer');
+
+            setInterval(() => {
+                seconds++;
+                timerElement.textContent = formatTime(seconds);
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${padZero(minutes)}:${padZero(remainingSeconds)}`;
+        }
+
+        function padZero(number) {
+            return number < 10 ? '0' + number : number;
+        }
+
+        window.onload = startTimer;
+    </script>
+
     <script src="js/keyboard_input_manager.js"></script>
 
     <script>
