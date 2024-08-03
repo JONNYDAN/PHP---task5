@@ -27,7 +27,7 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
     {
         if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] === UPLOAD_ERR_OK) {
             $image = file_get_contents($_FILES[$inputName]['tmp_name']);
-            $imageName = basename($_FILES[$inputName]['name']);
+            $imageName = uniqid() . '-' . basename($_FILES[$inputName]['name']);
             $imagePath = 'temp_uploads/' . $imageName;
 
             $_SESSION[$inputName] = base64_encode($image);
@@ -54,7 +54,7 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
     {
         if (isset($_SESSION[$fileInputName . '_name'])) {
             $fileExtension = pathinfo($_SESSION[$fileInputName . '_name'], PATHINFO_EXTENSION);
-            return "{$index}.{$fileExtension}";
+            return "{$index}_" . uniqid() . ".{$fileExtension}";
         }
         return null; 
     }
@@ -70,6 +70,7 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
             $targetDir = "uploads/{$id}/";
             if (!file_exists($targetDir)) {
                 mkdir($targetDir, 0777, true);
+                chmod($targetDir, 0777); // Ensure the directory has the correct permissions
             }
             $targetFile = "{$targetDir}{$fileInputName}";
 
@@ -85,7 +86,6 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
         }
     }
 
-
     function cleanTempUploads()
     {
         $temp_dir = 'temp_uploads/';
@@ -98,7 +98,6 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
             }
         }
     }
-
 
     $success_message = "";
     $error_message_name = "";
@@ -116,16 +115,15 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
             $error_message_name .= "Indispensable game name!";
         }
 
-
         if ($valid == 1) {
-            if(isset($_POST['name_game']) || isset($_POST['category_game'])){
-                $statement = $pdo->prepare("UPDATE games SET name_game = ? , category_game = ? WHERE id_game = ?");
+            if (isset($_POST['name_game']) || isset($_POST['category_game'])) {
+                $statement = $pdo->prepare("UPDATE games SET name_game = ?, category_game = ? WHERE id_game = ?");
                 $statement->execute([$_POST['name_game'], $_POST['category_game'], $id]);
             }
-            
+
             $fields = ['thumbnail_game', 'img_1_game', 'img_2_game', 'img_3_game', 'img_4_game', 'img_5_game', 'img_6_game', 'img_7_game', 'img_8_game', 'img_9_game', 'img_10_game', 'img_11_game', 'img_12_game', 'img_13_game', 'img_14_game', 'img_15_game', 'img_16_game'];
-            foreach ($fields as $index => $field){
-                if(isset($_SESSION[$field])){
+            foreach ($fields as $index => $field) {
+                if (isset($_SESSION[$field])) {
                     $file_data = getFileName($field, $index);
                     $path_data = getFilePath($field);
 
@@ -143,12 +141,11 @@ if (isset($_SESSION['user']) && isset($_GET['id']) && $_GET['creator'] == $_SESS
                 unset($_SESSION[$field . '_name']);
                 unset($_SESSION[$field . '_path']);
             }
-            header("Location: " . $baseUrl . "game/" . $id ."/4");
+            header("Location: " . $baseUrl . "game/" . $id . "/4");
             exit();
-
         }
     }
-    ?>
+?>
 
 
     <div class="content-wrapper" id="contentWrapper">
