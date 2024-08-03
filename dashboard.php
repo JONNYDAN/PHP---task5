@@ -95,8 +95,8 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                                         <path class="cls-1" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Zm0,92.93a15,15,0,1,1-15,15,15,15,0,0,1,15-15Zm0-46.47a15,15,0,1,1-15,15,15,15,0,0,1,15-15Z"></path>
                                     </svg>
                                     <ul>
-                                        <li><a href="edit-game/<?php echo $row['id_game'] ?>/<?php echo $_SESSION['user']['id_user'] ?>">Edit</a></li>
-                                        <li><a href="delete-game/<?php echo $row['id_game']?>/<?php echo $_SESSION['user']['id_user'] ?>">Delete</a></li>
+                                        <li><a href="edit-game/<?php echo $row['id_game'] ?>/">Edit</a></li>
+                                        <li><a href="delete-game/<?php echo $row['id_game']?>/">Delete</a></li>
                                     </ul>
                                 </div>
                             </div>
