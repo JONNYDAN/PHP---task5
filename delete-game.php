@@ -21,7 +21,7 @@ function deleteDirectory($dir)
     return rmdir($dir);
 }
 
-if (isset($_SESSION['user']) && isset($_GET['id']) &&  $_SESSION['user']['id_user']) {
+if (isset($_SESSION['user']) && isset($_GET['id'])) {
     $id = intval($_GET['id']);
 
     // Xóa game từ cơ sở dữ liệu
